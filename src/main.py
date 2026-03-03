@@ -1,3 +1,5 @@
+from logger import setup_logger
+logger = setup_logger()
 import argparse
 import joblib
 import pandas as pd
@@ -22,9 +24,10 @@ def main():
 
     if args.hours is not None:
         prediction = model.predict(pd.DataFrame([[args.hours]], columns=["hours"]))
+        logger.info(f"Prediction made for {args.hours} hours")
         print(f"Predicted score for {args.hours} hours: {prediction[0]:.2f}")
     else:
-        print("Model is ready. Use --hours to get prediction.")
+        logger.info("Model is ready")
 
 if __name__ == "__main__":
     main()
